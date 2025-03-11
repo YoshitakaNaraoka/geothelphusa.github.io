@@ -3,6 +3,8 @@ name = "geothelphusa-github-io"
 version = "0.1.0"
 edition = "2024"
 
+[build-dependencies]
+horrorshow = "0.8.4"
+
 [dependencies]
-yew = "0.21"
-tokio = "1.44.0"
+yew = { version = "0.21", features = ["csr"] }

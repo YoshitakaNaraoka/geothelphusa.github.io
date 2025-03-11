@@ -1,2 +1,7 @@
 [build]
+target = "dist/index.html"
+dist = "dist"
 public_url = "/geothelphusa.github.io/"
+
+[watch]
+watch = ["dist/", "src/"]

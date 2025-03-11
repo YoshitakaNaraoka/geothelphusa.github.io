@@ -1,5 +1,5 @@
 use yew::prelude::*;
-// use yew::ServerRenderer;
+
 
 #[function_component(App)]
 fn app() -> Html {
@@ -10,7 +10,7 @@ fn app() -> Html {
     }
 }
 
-// #[tokio::main]
-async fn no_main() {
-    yew::ServerRenderer::<App>::new().render().await;
+
+fn main() {
+    yew::Renderer::<App>::new().render();
 }
