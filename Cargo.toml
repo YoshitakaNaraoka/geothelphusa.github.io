@@ -1,7 +1,8 @@
 [package]
-name = "geothelphusa.github.io"
+name = "geothelphusa-github-io"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 yew = "0.21"
+tokio = "1.44.0"
