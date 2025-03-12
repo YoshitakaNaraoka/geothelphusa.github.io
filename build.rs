@@ -1,17 +1,17 @@
-use std::process::Command;
+// use std::process::Command;
 use std::fs;
 use std::path::Path;
 
 fn main() {
     // Yew アプリケーションのビルド
-    let output = Command::new("trunk")
+    /* let output = Command::new("trunk")
         .args(&["build"])
         .output()
         .expect("failed to execute trunk build");
 
     if !output.status.success() {
         panic!("trunk build failed: {}", String::from_utf8_lossy(&output.stderr));
-    }
+    } */
 
     // 出力ディレクトリの作成
     let out_dir = Path::new("dist");
