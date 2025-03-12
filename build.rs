@@ -3,7 +3,7 @@ use horrorshow::html;
 use std::fs::{File, create_dir_all};
 use std::io::Write;
 // use std::path::Path;
-use std::process::Command;
+// use std::process::Command;
 
 pub fn main() {
     /* generate `index.html` */
@@ -27,9 +27,10 @@ pub fn main() {
     let mut index_html = File::create("dist/index.html").expect("Could not create `index.html`.");
     // let dest_path = Path::new(&out_dir).join("index.html");
     writeln!(index_html, "{html}").expect("Could not write to `index.html`.");
-
+/*
     Command::new("trunk")
     .arg("build")
     .status()
     .expect("Failed to execute trunk build");
+*/
 }
