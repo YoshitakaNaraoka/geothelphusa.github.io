@@ -2,7 +2,6 @@ use horrorshow::helper::doctype;
 use horrorshow::html;
 use std::fs::File;
 use std::io::Write;
-use std::path::Path;
 use std::fs;
 
 fn main() {
