@@ -2,13 +2,14 @@ use horrorshow::helper::doctype;
 use horrorshow::html;
 use std::fs::{File, create_dir_all};
 use std::io::Write;
+use yew::prelude::*;
 // use std::path::Path;
 // use std::process::Command;
 
+#[function_component(App)]
 pub fn main() {
     /* generate `index.html` */
     create_dir_all("dist").expect("Could not create `dist` directory.");
-    let js_link = "index.js"; // Yewが生成したJavaScriptファイルのパス
     let html = html! {
         : doctype::HTML;
         html(lang="ja", data-theme="dim") {
@@ -35,7 +36,7 @@ pub fn main() {
 */
 }
 
-use yew::prelude::*;
+
 
 
 #[function_component(App)]
