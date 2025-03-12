@@ -18,6 +18,8 @@ jobs:
           override: true
       - name: Install Trunk
         run: cargo install trunk
+#      - name: Create dist directory
+#        run: mkdir -p target/release/dist
       - name: Build
         run: cargo build --release # ここで Yew がビルドされる
       - name: Build Web
