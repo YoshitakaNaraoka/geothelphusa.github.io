@@ -8,11 +8,12 @@ pub fn remove_integrity_attribute() -> Result<(), Box<dyn std::error::Error>> {
         .filter(|entry| entry.path().extension().map_or(false, |ext| ext == "html"));
 
     for file in html_files {
-        let file_path = file.path().to_str().unwrap();
+        let file_path_buf = file.path();
+        let file_path = file_path_buf.to_str().unwrap();
         let content = fs::read_to_string(file_path)?;
         let re = Regex::new(r#" integrity="[^"]*""#)?;
         let new_content = re.replace_all(&content, "");
-        fs::write(file_path, new_content.as_bytes())?;
+        fs::write(&file_path_buf, new_content.as_bytes())?;
     }
 
     Ok(())
