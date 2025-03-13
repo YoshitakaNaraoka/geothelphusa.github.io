@@ -2,6 +2,7 @@
 target = "index.html" # Try include .gitignore directory 
 dist = "dist"
 public_url = "/geothelphusa.github.io/"
+default-target = "geothelphusa-github-io"
 
 [watch]
 watch = ["dist/", "src/"]
