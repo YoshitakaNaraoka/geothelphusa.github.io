@@ -11,6 +11,8 @@ fn main() {
             head {
                 meta(name="viewport", content="width=device-width, initial-scale=1.0");
                 title : "Geothelphusa.github.io";
+
+                link(rel="rust", data-trunk="", data-bin="geothelphusa-github-io");
                 
                 // Do not apply integrity to preload
                 link(rel="preload", href="app.js", as="script", crossorigin="anonymous");
