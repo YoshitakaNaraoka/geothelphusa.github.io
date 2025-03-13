@@ -38,6 +38,6 @@ pub fn update_integrity_attributes() -> Result<(), Box<dyn std::error::Error>> {
     let final_content = wasm_re.replace_all(&new_content, format!("integrity=\"sha384-{}\"", wasm_hash));
 
     fs::write(html_file, final_content.as_bytes())?;
-    println!("Hashes updated successfully!"); // デバッグ情報の出力
+// log::debug!("Hashes updated successfully!");
     Ok(())
 }
