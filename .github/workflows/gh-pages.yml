@@ -25,12 +25,10 @@ jobs:
       - name: Build
         run: cargo build --release # ここで Yew がビルドされる
       - name: Build Web
-        run: trunk build --release --public-url /geothelphusa.github.io/ # 実質的デプロイ
+        run: trunk build --release # --public-url /geothelphusa.github.io/ # 実質的デプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist
           publish_branch: gh-pages
-          script: |
-            cp -r dist/* $GITHUB_WORKSPACE/gh-pages/
