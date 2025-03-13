@@ -1,3 +1,6 @@
+mod rm_integrity;
+mod refresh_update;
+
 use yew::prelude::*;
 
 #[function_component]
