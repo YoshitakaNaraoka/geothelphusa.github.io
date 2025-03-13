@@ -4,6 +4,7 @@ mod refresh_update;
 use yew::prelude::*;
 use rm_integrity::remove_integrity_attribute;
 use refresh_update::update_integrity_attributes;
+use web_sys::window;
 
 #[function_component]
 fn App() -> Html {
@@ -27,6 +28,10 @@ fn App() -> Html {
 fn main() -> Result<(), Box<dyn std::error::Error>> {    
     remove_integrity_attribute()?;
     update_integrity_attributes()?;
-    yew::Renderer::<App>::new().render();
+    
+    let document = window().unwrap().document().unwrap();
+    let app_div = document.get_element_by_id("app").expect("`div#app` not found.");
+    
+    yew::Renderer::<App>::with_root(app_div).render();
     Ok(())
 }

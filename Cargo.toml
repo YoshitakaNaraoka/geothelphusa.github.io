@@ -11,3 +11,4 @@ horrorshow = "0.8.4"
 regex = "1.11.1"
 yew = { version = "0.21", features = ["csr"] }
 log = "0.4.26"
+web-sys = "0.3.77"

@@ -12,8 +12,13 @@ fn main() {
                 meta(name="viewport", content="width=device-width, initial-scale=1.0");
                 title : "Geothelphusa.github.io";
                 
-                // data-trunk is auto add js name
-                link(data-trunk, rel="rust");
+                // Do not apply integrity to preload
+                link(rel="preload", href="app.js", as="script");
+                link(rel="preload", href="style.css", as="style");
+
+                // Integrity is applied to <script> and <link>
+                script(src="app.js", integrity="sha384-XXXX", crossorigin="anonymous") {}
+                link(rel="stylesheet", href="style.css", integrity="sha384-YYYY", crossorigin="anonymous");
             }
             body(class="flex flex-col min-h-screen") {
                 div(id="app") {}
