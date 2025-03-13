@@ -1,7 +1,7 @@
 [build]
-target = "index.html"
+target = "index.html" # Try include .gitignore directory 
 dist = "dist"
-public_url = "/geothelphusa.github.io/"
+# Override by yml argument public_url = "/geothelphusa.github.io/"
 
 [watch]
 watch = ["dist/", "src/"]
