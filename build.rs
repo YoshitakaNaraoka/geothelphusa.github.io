@@ -13,8 +13,8 @@ fn main() {
                 title : "Geothelphusa.github.io";
                 
                 // Do not apply integrity to preload
-                link(rel="preload", href="app.js", as="script");
-                link(rel="preload", href="style.css", as="style");
+                link(rel="preload", href="app.js", as="script", crossorigin="anonymous");
+                link(rel="preload", href="style.css", as="style", crossorigin="anonymous");
 
                 // Integrity is applied to <script> and <link>
                 script(src="app.js", integrity="sha384-XXXX", crossorigin="anonymous") {}
