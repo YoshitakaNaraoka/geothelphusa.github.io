@@ -2,7 +2,7 @@ use std::fs;
 use std::process::Command;
 use regex::Regex;
 
-fn generate_hashes() -> Result<(String, String), Box<dyn std::error::Error>> {
+pub fn update_integrity_attributes() -> Result<(), Box<dyn std::error::Error>> {
     let js_file = fs::read_dir("dist")?
         .filter_map(|entry| entry.ok())
         .find(|entry| entry.file_name().to_string_lossy().ends_with(".js"))
@@ -29,10 +29,6 @@ fn generate_hashes() -> Result<(String, String), Box<dyn std::error::Error>> {
         .output()?;
     let wasm_hash = String::from_utf8(wasm_hash.stdout)?.trim().to_string();
 
-    Ok((js_hash, wasm_hash))
-}
-
-fn update_integrity_attributes(js_hash: &str, wasm_hash: &str) -> Result<(), Box<dyn std::error::Error>> {
     let html_file = "dist/index.html";
     let content = fs::read_to_string(html_file)?;
 
@@ -43,11 +39,5 @@ fn update_integrity_attributes(js_hash: &str, wasm_hash: &str) -> Result<(), Box
     let final_content = wasm_re.replace_all(&new_content, format!("integrity=\"sha384-{}\"", wasm_hash));
 
     fs::write(html_file, final_content.as_bytes())?;
-    Ok(())
-}
-
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let (js_hash, wasm_hash) = generate_hashes()?;
-    update_integrity_attributes(&js_hash, &wasm_hash)?;
     Ok(())
 }
