@@ -7,9 +7,6 @@ use refresh_update::update_integrity_attributes;
 
 #[function_component]
 fn App() -> Html {
-    let _ = remove_integrity_attribute();
-    let _ = update_integrity_attributes();
-    
     let counter = use_state(|| 0);
     let onclick = {
         let counter = counter.clone();
@@ -27,6 +24,9 @@ fn App() -> Html {
     }
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {    
+    remove_integrity_attribute()?;
+    update_integrity_attributes()?;
     yew::Renderer::<App>::new().render();
+    Ok(())
 }
