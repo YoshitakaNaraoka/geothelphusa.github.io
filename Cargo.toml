@@ -10,3 +10,4 @@ horrorshow = "0.8.4"
 [dependencies]
 regex = "1.11.1"
 yew = { version = "0.21", features = ["csr"] }
+log = "0.4.26"
