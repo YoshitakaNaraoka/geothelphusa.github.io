@@ -9,7 +9,8 @@ pub fn remove_integrity_attribute() -> Result<(), Box<dyn std::error::Error>> {
 
     for file in html_files {
         let file_path_buf = file.path();
-        let file_path = file_path_buf.to_str().unwrap();
+        let file_path = file_path_buf.to_str().ok_or("Could not convert file path to string")?;
+
         let content = fs::read_to_string(file_path)?;
         let re = Regex::new(r#" integrity="[^"]*""#)?;
         let new_content = re.replace_all(&content, "");

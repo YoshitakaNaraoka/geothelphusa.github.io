@@ -14,14 +14,14 @@ pub fn update_integrity_attributes() -> Result<(), Box<dyn std::error::Error>> {
         .ok_or("WASM file not found")?;
 
     let js_hash_output = Command::new("openssl")
-        .args(&["dgst", "-sha384", "-binary", js_file.path().to_str().unwrap()])
+        .args(&["dgst", "-sha384", "-binary", js_file.path().to_str().ok_or("Could not convert js_file path to string")?])
         .stdout(Stdio::piped())
         .spawn()?;
     let js_hash = Command::new("base64").stdin(js_hash_output.stdout.unwrap()).output()?;
     let js_hash = String::from_utf8(js_hash.stdout)?.trim().to_string();
 
     let wasm_hash_output = Command::new("openssl")
-        .args(&["dgst", "-sha384", "-binary", wasm_file.path().to_str().unwrap()])
+        .args(&["dgst", "-sha384", "-binary", wasm_file.path().to_str().ok_or("Could not convert wasm_file path to string")?])
         .stdout(Stdio::piped())
         .spawn()?;
 
