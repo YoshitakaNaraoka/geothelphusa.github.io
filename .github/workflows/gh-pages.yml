@@ -26,6 +26,8 @@ jobs:
         run: cargo build --release # ここで Yew がビルドされる generate HTML template
       - name: Build Web
         run: trunk build --release --public-url /geothelphusa.github.io/ # 実質的デプロイ overwrite template HTML リポジトリ名がサイトドメインなので/でOK
+      - name: Update index.html with correct JS file
+        run: cargo run --release --bin update_index
       - name: Check dist directory
         run: ls -l dist
       - name: Delete integrity
