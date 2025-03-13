@@ -1,5 +1,5 @@
 [build]
-target = "dist" # Try include .gitignore directory 
+target = "dist/index.html" # Try include .gitignore directory 
 dist = "dist"
 # Override by yml argument public_url = "/geothelphusa.github.io/"
 
