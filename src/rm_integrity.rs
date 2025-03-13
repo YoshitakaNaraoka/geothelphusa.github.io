@@ -15,6 +15,6 @@ pub fn remove_integrity_attribute() -> Result<(), Box<dyn std::error::Error>> {
         let new_content = re.replace_all(&content, "");
         fs::write(&file_path_buf, new_content.as_bytes())?;
     }
-
+    println!("Integrity attribute removed successfully.");
     Ok(())
 }
