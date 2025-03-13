@@ -11,10 +11,12 @@ fn main() {
             head {
                 meta(name="viewport", content="width=device-width, initial-scale=1.0");
                 title : "Geothelphusa.github.io";
-                // link(data-trunk rel="rust" href="/Cargo.toml");
+                
+                // data-trunk is auto add js name
+                link(data-trunk, rel="rust");
             }
             body(class="flex flex-col min-h-screen") {
-                div(id="app")
+                div(id="app") {}
             }
         }
     };
