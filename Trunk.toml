@@ -1,6 +1,6 @@
-# [build]
-# target = "index.html" # Try include .gitignore directory 
-# dist = "dist"
+[build]
+target = "index.html" # Try include .gitignore directory 
+dist = "dist"
 # public_url = "/geothelphusa.github.io/"
 
 # [watch]

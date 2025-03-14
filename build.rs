@@ -9,23 +9,11 @@ fn main() {
         : doctype::HTML;
         html(lang="ja", data-theme="dim") {
             head {
-                meta(name="viewport", content="width=device-width, initial-scale=1.0");
-                title : "Geothelphusa.github.io";
-
-                link(rel="rust", data-trunk="", data-bin="geothelphusa-github-io");
-                
-                // Do not apply integrity to preload
-                link(rel="preload", href="app.js", as="script", crossorigin="anonymous");
-                link(rel="preload", href="style.css", as="style", crossorigin="anonymous");
-
-                // Integrity is applied to <script> and <link>
-                script(src="app.js", integrity="sha384-XXXX", crossorigin="anonymous") {}
-                link(rel="stylesheet", href="style.css", integrity="sha384-YYYY", crossorigin="anonymous");
+                meta(charset="utf-8");
+                title : "draft";
+                link(data-trunk, rel="rust", href="Cargo.toml");
             }
-            body(class="flex flex-col min-h-screen") {
-                div(id="app") {}
-                script(src="app.js") {}
-            }
+            body { }
         }
     };
 
