@@ -51,7 +51,7 @@ fn main() -> std::io::Result<()> {
         // 変更 1: import 文の修正
         content = content.replace(
             &format!(r#"import init, * as bindings from '/geothelphusa.github.io/{}';"#, old_js_name),
-            r#"import init, * as bindings from 'app.js';"#,
+            r#"import init, * as bindings from '/app.js';"#,
         );
 
         // 変更 2: `<script>` タグの `type="module"` 追加
