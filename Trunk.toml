@@ -8,7 +8,3 @@ watch = ["dist/", "src/"]
 
 [release]
 post_build = "cargo run --release"
-
-[[hook]]
-stage = "build"
-command = "mv dist/geothelphusa-github-io-*.js dist/app.js"
