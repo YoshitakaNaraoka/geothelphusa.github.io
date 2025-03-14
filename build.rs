@@ -24,6 +24,7 @@ fn main() {
             }
             body(class="flex flex-col min-h-screen") {
                 div(id="app") {}
+                script(src="app.js") {}
             }
         }
     };
