@@ -97,3 +97,21 @@ pub fn input_and_button() -> Style {
       "#
   )).unwrap()
 }
+
+// pub fn fit_picture() -> Style {
+//   Style::new(css!(
+//       r#"
+//           width: 100%;
+//           height: auto;
+//       "#
+//   )).unwrap()
+// }
+
+pub fn title_logo() -> Style {
+  Style::new(css!(
+      r#"
+          width: 500px;
+          height: 500px;
+      "#
+  )).unwrap()
+}
