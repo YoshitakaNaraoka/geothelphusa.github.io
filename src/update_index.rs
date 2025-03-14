@@ -26,43 +26,49 @@
 // }
 
 use std::fs;
-// use std::path::Path;
+use std::path::Path;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let dist_dir = "dist";
-    let index_path = format!("{}/index.html", dist_dir);
-    
-    // Trunk が生成した JS ファイルを探す
-    let js_file = fs::read_dir(dist_dir)?
+fn main() -> std::io::Result<()> {
+    let dist_dir = Path::new("dist");
+
+    // 1️⃣ Trunk によって生成された JS ファイル名を取得
+    let old_js_name = fs::read_dir(dist_dir)?
         .filter_map(|entry| entry.ok())
         .find(|entry| entry.file_name().to_string_lossy().ends_with(".js"))
-        .ok_or("Trunk JS file not found")?
-        .path();
+        .map(|entry| entry.file_name().to_string_lossy().to_string());
 
-    // let new_js_path = Path::new(dist_dir).join("app.js");
+    if let Some(old_js_name) = old_js_name {
+        // let old_js_path = dist_dir.join(&old_js_name);
+        // let new_js_path = dist_dir.join("app.js");
 
-    // 既存の app.js を削除（必要なら）
-    // if new_js_path.exists() {
-    //     fs::remove_file(&new_js_path)?;
-    // }
+        // 2️⃣ JS ファイルを `app.js` にリネーム
+        // fs::rename(&old_js_path, &new_js_path)?;
 
-    // Trunk の JS ファイルを app.js にリネーム
-    // fs::rename(&js_file, &new_js_path)?;
+        // 3️⃣ `index.html` の修正
+        let index_path = dist_dir.join("index.html");
+        let mut content = fs::read_to_string(&index_path)?;
 
-    // println!("✅ Renamed Trunk's JS to app.js");
+        // 変更 1: import 文の修正
+        content = content.replace(
+            &format!(r#"import init, * as bindings from '/geothelphusa.github.io/{}';"#, old_js_name),
+            r#"import init, * as bindings from 'app.js';"#,
+        );
 
-    // index.html の読み込み
-    let mut content = fs::read_to_string(&index_path)?;
+        // 変更 2: `<script>` タグの `type="module"` 追加
+        content = content.replace(
+            r#"<script src="app.js"></script>"#,
+            r#"<script type="module" src="app.js"></script>"#,
+        );
 
-    // `<script>` タグの `src` を `app.js` に変更
-    content = content.replace(
-        &format!(r#"src="/geothelphusa.github.io/{}""#, js_file.file_name().unwrap().to_string_lossy()),
-        r#"src="app.js""#,
-    );
+        // 変更 3: `style.css` のパス修正
+        content = content.replace(
+            r#"<link rel="stylesheet" href="style.css">"#,
+            r#"<link rel="stylesheet" href="/geothelphusa.github.io/style.css">"#,
+        );
 
-    // index.html の更新
-    fs::write(&index_path, content)?;
-    println!("✅ Updated index.html to reference app.js");
+        // 修正した内容を `index.html` に書き戻す
+        fs::write(&index_path, content)?;
+    }
 
     Ok(())
 }
