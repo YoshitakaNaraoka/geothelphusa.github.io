@@ -46,11 +46,13 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                     <nav class={classes!(nav_styles())}>
                         <ul class={css!("display: flex;")}>
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"サービス紹介"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"最新情報"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"ブログ"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"お問い合わせ"}</a></li>
+                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
+                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
+                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
+                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
                         </ul>
+                        <button class={classes!(input_and_button())} type="submit" onclick={toggle_light}>{"Toggle Light Mode"}</button>
+                        <button class={classes!(input_and_button())} type="submit" onclick={toggle_dark}>{"Toggle Dark Mode"}</button>
                     </nav>
                     <main class={main_classes}>
                         <div class={classes!(center_styles())}>
@@ -61,8 +63,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
                         <h1>{"Welcome to Geothelphusa site !"}</h1>
                         <div class={classes!(center_styles())}>
-                            <button class={classes!(input_and_button())} type="submit" onclick={toggle_light}>{"Toggle Light Mode"}</button>
-                            <button class={classes!(input_and_button())} type="submit" onclick={toggle_dark}>{"Toggle Dark Mode"}</button>
+                            
                         </div>
                         <p>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
                     </main>
