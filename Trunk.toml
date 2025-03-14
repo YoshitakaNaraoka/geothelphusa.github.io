@@ -1,10 +1,13 @@
-[build]
-target = "index.html" # Try include .gitignore directory 
-dist = "dist"
-public_url = "/geothelphusa.github.io/"
+# [build]
+# target = "index.html" # Try include .gitignore directory 
+# dist = "dist"
+# public_url = "/geothelphusa.github.io/"
 
-[watch]
-watch = ["dist/", "src/"]
+# [watch]
+# watch = ["dist/", "src/"]
 
-[release]
-post_build = "cargo run --release"
+# [release]
+# post_build = "cargo run --release"
+
+
+# The theory that don't have to

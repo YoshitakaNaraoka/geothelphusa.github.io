@@ -23,9 +23,9 @@ jobs:
       - name: Install Trunk
         run: cargo install trunk
       - name: Build
-        run: cargo build --release # ここで Yew がビルドされる generate HTML template
+        run: cargo build --release --target wasm32-unknown-unknown # ここで Yew がビルドされる generate HTML template
       - name: Build Web
-        run: trunk build --release --public-url /geothelphusa.github.io/ # 実質的デプロイ overwrite template HTML リポジトリ名がサイトドメインなので/でOK
+        run: trunk build --release --public-url geothelphusa.github.io # 実質的デプロイ overwrite template HTML リポジトリ名がサイトドメインなので/でOK
       - name: Update index.html with correct JS file
         run: cargo run --release --bin update_index
       - name: Rename to app.js
