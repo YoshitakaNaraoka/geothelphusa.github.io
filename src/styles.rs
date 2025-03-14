@@ -115,3 +115,36 @@ pub fn title_logo() -> Style {
       "#
   )).unwrap()
 }
+
+pub fn nav_styles() -> Style {
+  Style::new(css!(
+      r#"
+          width: 100%;
+          height: 70px;
+          background-color: dimgray;
+          padding-top: 5px;
+          box-sizing: border-box;
+          display: flex;
+          list-style: none;
+      "#
+  )).unwrap()
+}
+
+pub fn menu_items() -> Style {
+  Style::new(css!(
+      r#"
+          display: block;
+          text-decoration: none;
+          color: white;
+          margin-right: 35px;
+      "#
+  )).unwrap()
+}
+
+pub fn li_none() -> Style {
+  Style::new(css!(
+      r#"
+          list-style: none;
+      "#
+  )).unwrap()
+}
