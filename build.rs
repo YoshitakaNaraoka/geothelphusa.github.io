@@ -5,7 +5,8 @@ use std::io::Write;
 use std::fs;
 
 fn main() {
-    let favicon_path = "./static/Geothelphusa.jpeg";
+const FAVICON_PATH: &str = "./static/Geothelphusa.jpeg";
+    let favicon_path = FAVICON_PATH;
     
     let html = html! {
         : doctype::HTML;

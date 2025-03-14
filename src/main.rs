@@ -6,7 +6,8 @@ use crate::styles::*;
 
 #[styled_component(App)]
 fn app() -> Html {
-    let logo_path = "./static/Geothelphusa.jpeg";
+const LOGO_PATH: &str = "./static/Geothelphusa.jpeg";
+    let logo_path = LOGO_PATH;
     let counter = use_state(|| 0);
     let onclick = {
         let counter = counter.clone();
@@ -82,8 +83,8 @@ fn app() -> Html {
                 // <p>{&*greet_msg}</p>
 
                 <div class={classes!(center_styles())}>
-                    <button class={classes!(input_and_button())} type="submit" onclick={toggle_light}>{"Toggle Light Mode"}</button>
-                    <button class={classes!(input_and_button())} type="submit" onclick={toggle_dark}>{"Toggle Dark Mode"}</button>
+<button class={classes!(input_and_button())} type="submit" onclick={toggle_light} aria-pressed={!*dark_mode}>{"Toggle Light Mode"}</button>
+                    <button class={classes!(input_and_button())} type="submit" onclick={toggle_dark} aria-pressed={*dark_mode}>{"Toggle Dark Mode"}</button>
                 </div>
                 <p>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
             </main>
