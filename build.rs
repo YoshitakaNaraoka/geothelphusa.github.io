@@ -11,7 +11,9 @@ fn main() {
             head {
                 meta(charset="utf-8");
                 title : "draft";
+                link(data-trunk, rel="rust", href="Cargo.toml");
             }
+            body { }
         }
     };
 
