@@ -9,7 +9,7 @@
 </div>
 
 ## Language
-[Japanese](docs/README_ja.md)
+[Japanese](/README_ja.md)
 
 ## Overview
 
@@ -19,7 +19,7 @@ We exist to provide OSS as an option for manufacturing workers in the digital tr
 
 ## Contributing
 This website is opensource, issues and pull requests are always welcome!!!  
-When contributing, please read [CONTRIBUTING](docs/CONTRIBUTING.md).
+When contributing, please read [CONTRIBUTING](/CONTRIBUTING.md).
 
 
 ## Community
