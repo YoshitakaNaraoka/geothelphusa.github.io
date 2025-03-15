@@ -37,17 +37,17 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     };
 
     // Chrome 特有の余白を消すスタイル
-    let del_blank = css!(r#"
-        * {
-            margin: 0;
-            padding: 0;
-        }
-    "#);
+    // let del_blank = css!(r#"
+    //     * {
+    //         margin: 0;
+    //         padding: 0;
+    //     }
+    // "#);
 
     html! {
-        <html class={classes!(base_styles(), del_blank)}>
+        <html>
             
-            <body>
+            <body class={classes!(base_styles())}>
                 <div>
                     <nav class={classes!(nav_styles())}>
                         <ul class={css!("display: flex;")}>
