@@ -152,7 +152,7 @@ pub fn li_none() -> Style {
 pub fn toggle_button() -> Style {
   Style::new(css!(
       r#"
-          .toggleButton {
+          
             position: relative;
             display: block;
             width: 56px;
@@ -161,14 +161,14 @@ pub fn toggle_button() -> Style {
             border-radius: 9999px;
             background-color: #dddddd;
             cursor: pointer;
-          }
+          
 
-          .toggleButton:has(:focus-visible) {
+          :has(:focus-visible) {
             outline: auto;
             outline: auto -webkit-focus-ring-color;
           }
 
-          .toggleButton:has(:checked) {
+          :checked {
             background-color: #4ade80;
           }
       "#
@@ -178,11 +178,11 @@ pub fn toggle_button() -> Style {
 pub fn toggle_slider() -> Style {
   Style::new(css!(
       r#"
-          .toggleButton__checkbox {
+          
             appearance: none;
             position: absolute;
-            top: 50%;
-            left: 2px;
+            top: 40%;
+            left: 0px;
             width: 24px;
             height: 24px;
             border: 1px solid #555555;
@@ -192,10 +192,10 @@ pub fn toggle_slider() -> Style {
             background-color: #ffffff;
             transition: left 0.2s;
             cursor: pointer;
-          }
+          
 
-          .toggleButton__checkbox:checked {
-            left: calc(100% - 26px);
+          :checked {
+            left: calc(100% - 32px);
           }
       "#
   )).unwrap()

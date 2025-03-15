@@ -48,7 +48,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
                         </ul>
                         <label class={classes!(toggle_button())}>
-                            <input type="checkbox" class={classes!(toggle_slider())} />
+                            <input type="checkbox" class={classes!(toggle_slider())} onchange={toggle_dark} onchange={toggle_light} />
                         </label>
                         <button>
                         <button class={classes!(input_and_button())} type="submit" onclick={toggle_light}>{"Toggle Light Mode"}</button>
