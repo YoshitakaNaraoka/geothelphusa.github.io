@@ -17,8 +17,7 @@ const FAVICON_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geoth
                 link(data-trunk, rel="rust", href="Cargo.toml");
                 link(rel="icon", href=favicon_path);
                 style {
-                    : "body { margin: 0; }"; // Chromeの余白を消すためのスタイル
-                    : "body { padding: 0; }";
+                    : "body { margin: 0; padding: 0; } "; // Chromeの余白を消すためのスタイル
                 }
             }
             body { }
