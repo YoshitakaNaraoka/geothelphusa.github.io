@@ -171,7 +171,13 @@ pub fn toggle_button() -> Style {
           .toggleButton:has(:checked) {
             background-color: #4ade80;
           }
+      "#
+  )).unwrap()
+}
 
+pub fn toggle_slider() -> Style {
+  Style::new(css!(
+      r#"
           .toggleButton__checkbox {
             appearance: none;
             position: absolute;
