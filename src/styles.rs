@@ -153,25 +153,19 @@ pub fn toggle_button() -> Style {
   Style::new(css!(
       r#"
             position: relative;
-            display: block;
+            display: flex;
             width: 56px;
             height: 28px;
             border: 1px solid #555555;
             border-radius: 9999px;
             background-color: #dddddd;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
           :has(:focus-visible) {
             outline: auto;
             outline: auto -webkit-focus-ring-color;
           }
 
-          :checked {
-            
-          }
       "#
   )).unwrap()
 }
