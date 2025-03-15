@@ -36,17 +36,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
         main_classes.push(light_mode_styles());
     };
 
-    // Chrome 特有の余白を消すスタイル
-    // let del_blank = css!(r#"
-    //     * {
-    //         margin: 0;
-    //         padding: 0;
-    //     }
-    // "#);
-
     html! {
-        <html>
-            
             <body class={classes!(base_styles())}>
                 <div>
                     <nav class={classes!(nav_styles())}>
@@ -75,7 +65,6 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                     </main>
                 </div>
             </body>
-        </html>
     }
 }
 
