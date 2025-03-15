@@ -80,23 +80,23 @@ pub fn container_styles() -> Style {
 //   .unwrap()
 // }
 
-pub fn input_and_button() -> Style {
-  Style::new(css!(
-      r#"
-          border-radius: 8px;
-          border: 1px solid transparent;
-          padding: 0.6em 1.2em;
-          font-size: 1em;
-          font-weight: 500;
-          font-family: inherit;
-          color: #0f0f0f;
-          background-color: #ffffff;
-          transition: border-color 0.25s;
-          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-          outline: none;
-      "#
-  )).unwrap()
-}
+// pub fn input_and_button() -> Style {
+//   Style::new(css!(
+//       r#"
+//           border-radius: 8px;
+//           border: 1px solid transparent;
+//           padding: 0.6em 1.2em;
+//           font-size: 1em;
+//           font-weight: 500;
+//           font-family: inherit;
+//           color: #0f0f0f;
+//           background-color: #ffffff;
+//           transition: border-color 0.25s;
+//           box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+//           outline: none;
+//       "#
+//   )).unwrap()
+// }
 
 // pub fn fit_picture() -> Style {
 //   Style::new(css!(

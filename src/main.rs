@@ -10,21 +10,21 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     let logo_path = LOGO_PATH;
 
     // モードの状態を保持する変数(初期値はライトモード)
-    let dark_mode = use_state(|| false);
+    let dark_mode = use_state(|| true);
 
-    let toggle_light: Callback<MouseEvent> = {
-        let dark_mode = dark_mode.clone();
-        Callback::from(move |e: MouseEvent| {
-            e.prevent_default();
-            dark_mode.set(!*dark_mode);
-        })
-    };
-    let toggle_dark: Callback<MouseEvent> = {
-        let dark_mode = dark_mode.clone();
-        Callback::from(move |_e: MouseEvent| {
-            dark_mode.set(!*dark_mode);
-        })
-    };
+    // let toggle_light: Callback<MouseEvent> = {
+    //     let dark_mode = dark_mode.clone();
+    //     Callback::from(move |e: MouseEvent| {
+    //         e.prevent_default();
+    //         dark_mode.set(!*dark_mode);
+    //     })
+    // };
+    // let toggle_dark: Callback<MouseEvent> = {
+    //     let dark_mode = dark_mode.clone();
+    //     Callback::from(move |_e: MouseEvent| {
+    //         dark_mode.set(!*dark_mode);
+    //     })
+    // };
 
     let mut main_classes = Classes::new();
     main_classes.push(container_styles());
@@ -55,6 +55,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                                 }
                             checked={*dark_mode}/>
                         </label>
+                        <p class={css!("align-items:flex-end;")}>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
                     </nav>
                     <main class={main_classes}>
                         <div class={classes!(center_styles())}>
@@ -67,7 +68,6 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                         <div class={classes!(center_styles())}>
                             
                         </div>
-                        <p>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
                     </main>
                 </div>
             </body>
