@@ -12,20 +12,6 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     // モードの状態を保持する変数(初期値はライトモード)
     let dark_mode = use_state(|| true);
 
-    // let toggle_light: Callback<MouseEvent> = {
-    //     let dark_mode = dark_mode.clone();
-    //     Callback::from(move |e: MouseEvent| {
-    //         e.prevent_default();
-    //         dark_mode.set(!*dark_mode);
-    //     })
-    // };
-    // let toggle_dark: Callback<MouseEvent> = {
-    //     let dark_mode = dark_mode.clone();
-    //     Callback::from(move |_e: MouseEvent| {
-    //         dark_mode.set(!*dark_mode);
-    //     })
-    // };
-
     let mut main_classes = Classes::new();
     main_classes.push(container_styles());
     if *dark_mode {
