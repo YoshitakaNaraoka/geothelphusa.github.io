@@ -16,13 +16,13 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
         let dark_mode = dark_mode.clone();
         Callback::from(move |e: MouseEvent| {
             e.prevent_default();
-            dark_mode.set(false);
+            dark_mode.set(!*dark_mode);
         })
     };
     let toggle_dark: Callback<MouseEvent> = {
         let dark_mode = dark_mode.clone();
         Callback::from(move |_e: MouseEvent| {
-            dark_mode.set(true);
+            dark_mode.set(!*dark_mode);
         })
     };
 
@@ -45,15 +45,15 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
                         </ul>
-                        <button class={classes!(input_and_button())} onclick={toggle_light}>{"Toggle Light Mode"}</button>
-                        <button class={classes!(input_and_button())} onclick={toggle_dark}>{"Toggle Dark Mode"}</button>
                         <label class={classes!(toggle_button())}>
-                            <input type="checkbox" 
+                            <input 
+                                type="checkbox" 
                                 class={classes!(toggle_slider())}
-                                onchange={Callback::from(move |_| {
-                                    dark_mode.set(!*dark_mode);
-                                })}
-                            />
+                                onchange={
+                                    let dark_mode = dark_mode.clone();
+                                    Callback::from(move |_| dark_mode.set(!*dark_mode))
+                                }
+                            checked={*dark_mode}/>
                         </label>
                     </nav>
                     <main class={main_classes}>
@@ -67,7 +67,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                         <div class={classes!(center_styles())}>
                             
                         </div>
-                        //<p>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
+                        <p>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
                     </main>
                 </div>
             </body>
