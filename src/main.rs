@@ -53,9 +53,8 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                                     let dark_mode = dark_mode.clone();
                                     Callback::from(move |_| dark_mode.set(!*dark_mode))
                                 }
-                            checked={*dark_mode}/>
+                            checked={*dark_mode}/>  
                         </label>
-                        <p class={css!("align-items:flex-end;")}>{if *dark_mode {"Dark Mode"} else {"Light Mode"}}</p>
                     </nav>
                     <main class={main_classes}>
                         <div class={classes!(center_styles())}>
@@ -66,7 +65,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
                         <h1>{"Welcome to Geothelphusa site !"}</h1>
                         <div class={classes!(center_styles())}>
-                            
+                        <p class={css!("align-items:flex-end;")}>{if *dark_mode {"Dark"} else {"Light"}}</p>
                         </div>
                     </main>
                 </div>

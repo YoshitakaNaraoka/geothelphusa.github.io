@@ -152,7 +152,6 @@ pub fn li_none() -> Style {
 pub fn toggle_button() -> Style {
   Style::new(css!(
       r#"
-          
             position: relative;
             display: block;
             width: 56px;
@@ -161,7 +160,9 @@ pub fn toggle_button() -> Style {
             border-radius: 9999px;
             background-color: #dddddd;
             cursor: pointer;
-          
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
           :has(:focus-visible) {
             outline: auto;
@@ -169,7 +170,7 @@ pub fn toggle_button() -> Style {
           }
 
           :checked {
-            background-color: #4ade80;
+            
           }
       "#
   )).unwrap()
@@ -196,6 +197,7 @@ pub fn toggle_slider() -> Style {
 
           :checked {
             left: calc(100% - 32px);
+            background-color: #4ade80;
           }
       "#
   )).unwrap()
