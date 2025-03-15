@@ -148,3 +148,14 @@ pub fn li_none() -> Style {
       "#
   )).unwrap()
 }
+
+// pub fn del_blank() -> Style {
+//   Style::new(css!(
+//       r#"
+//           margin: 0;
+//           padding: 0;
+//       "#
+//   )).unwrap()
+// }
+
+// まだ Style::new 形式での * の使い方が不明
