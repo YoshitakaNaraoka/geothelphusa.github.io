@@ -9,7 +9,7 @@
 </div>
 
 ## 言語
-[英語](README.md)
+[英語](geothelphusa.github.io/README.md)
 
 ## 概要と由来
 > Geothelphusa はサワガニ属を表す学名です．
