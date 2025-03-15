@@ -63,7 +63,7 @@ pub fn container_styles() -> Style {
           padding-top: 10vh;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: top;
           text-align: center;
       "#
   ))
