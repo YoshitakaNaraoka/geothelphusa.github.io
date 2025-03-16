@@ -92,13 +92,14 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     let is_menu_opened = use_state(|| false);
 
     let onclick = {
-        let is_menu_opened = is_menu_opened.clone();
-        Callback::from(move |_| {
-            is_menu_opened.set(!*is_menu_opened);
-        })
+        let is_menu_opened_clone = is_menu_opened.clone();
+        Callback::from(move |_| is_menu_opened_clone.set(!*is_menu_opened_clone))
     };
 
-    // モードの状態を保持する変数(初期値はライトモード)
+    let onclick_clone = onclick.clone();
+    let onclick_clone2 = onclick.clone();
+
+        // モードの状態を保持する変数(初期値はライトモード)
     let dark_mode = use_state(|| true);
 
     let mut main_classes = Classes::new();
@@ -115,22 +116,36 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
             <body class={classes!(base_styles())}>
                 <div class={stylesheet}>
                         <nav class={classes!(nav_styles())}>
-                        <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
+                        <MenuButton onclick={onclick_clone} is_opened={*is_menu_opened} />
                         <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
+                        // オーバーレイ表示（ハンバーガーメニューを開いたとき）
                         { if *is_menu_opened {
-                            html! {
-                                <>
-                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"ABOUT"}</a></li>
-                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
-                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
-                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
-                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
-                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
-                                </>
+                            html! { 
+                                <div class={classes!(overlay_style(), "is-opened")} onclick={onclick.clone()}>
+                                    <div class={classes!(menu_style())} onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
+                                        <ul>
+                                            <li><a class={classes!(menu_items())} href="#">{"ABOUT"}</a></li>
+                                            <li><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
+                                            <li><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
+                                            <li><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
+                                            <li><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
+                                            <li><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             }
                         } else {
                             html! {}
                         }}
+
+                        // ハンバーガーボタン
+                        <button id="menuButton" type="button" class={classes!(button_style(), if *is_menu_opened { "is-opened" } else { "" })} 
+                                aria-labelledby="menuButtonLabel" onclick={onclick_clone2}>
+                            <span class="menu-button__line">
+                                <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
+                            </span>
+                        </button>
+
                     </ul>
                     
                             <label class={classes!(toggle_button())}>

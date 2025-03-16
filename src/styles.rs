@@ -201,4 +201,85 @@ pub fn toggle_slider() -> Style {
   )).unwrap()
 }
 
+pub fn overlay_style() -> Style {
+  Style::new(css!(
+  r#"
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &.is-opened {
+      opacity: 1;
+      visibility: visible;
+  }
+  "#
+))
+.unwrap()
+}
+
+pub fn menu_style() -> Style {
+  Style::new(css!(
+  r#"
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  z-index: 20;
+  "#
+))
+.unwrap()
+}
+
+pub fn button_style() -> Style {
+  Style::new(css!(
+  r#"
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 6px;
+  background: white;
+  border: 1px solid #333;
+  border-radius: 4px;
+
+  &__line,
+  &::before,
+  &::after {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background-color: #333;
+      transition: transform 0.3s, opacity 0.3s;
+  }
+
+  &.is-opened &__line {
+      opacity: 0;
+  }
+
+  &.is-opened::before {
+      transform: translateY(8px) rotate(45deg);
+  }
+
+  &.is-opened::after {
+      transform: translateY(-8px) rotate(-45deg);
+  }
+  "#
+))
+.unwrap()
+}
 
