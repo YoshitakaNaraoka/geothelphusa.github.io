@@ -115,15 +115,16 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
             
             <body class={classes!(base_styles())}>
                 <div class={stylesheet}>
-                        <nav class={classes!(nav_styles())}>
-                        <MenuButton onclick={onclick_clone} is_opened={*is_menu_opened} />
+                <nav class={classes!(nav_styles())}>
+                <MenuButton onclick={onclick_clone} is_opened={*is_menu_opened} />
+            </nav>
                         <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
                         // オーバーレイ表示（ハンバーガーメニューを開いたとき）
                         { if *is_menu_opened {
-                            html! { 
+                            html! {
                                 <div class={classes!(overlay_style(), "is-opened")} onclick={onclick.clone()}>
                                     <div class={classes!(menu_style())} onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
-                                        <ul>
+                                        <ul class={classes!(menu_list_style())}>
                                             <li><a class={classes!(menu_items())} href="#">{"ABOUT"}</a></li>
                                             <li><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
                                             <li><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
@@ -136,15 +137,15 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                             }
                         } else {
                             html! {}
-                        }}
+                        }}                        
 
                         // ハンバーガーボタン
-                        <button id="menuButton" type="button" class={classes!(button_style(), if *is_menu_opened { "is-opened" } else { "" })} 
-                                aria-labelledby="menuButtonLabel" onclick={onclick_clone2}>
-                            <span class="menu-button__line">
-                                <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
-                            </span>
-                        </button>
+                        // <button id="menuButton" type="button" class={classes!(button_style(), if *is_menu_opened { "is-opened" } else { "" })} 
+                        //         aria-labelledby="menuButtonLabel" onclick={onclick_clone2}>
+                        //     <span class="menu-button__line">
+                        //         <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
+                        //     </span>
+                        // </button>
 
                     </ul>
                     
@@ -158,7 +159,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                                     }
                                 checked={*dark_mode}/>  
                             </label>
-                        </nav>
+                        //</nav>
                         <main class={main_classes}>
                             <div class={classes!(center_styles())}>
                                 <a href="https://github.com/Geothelphusa">

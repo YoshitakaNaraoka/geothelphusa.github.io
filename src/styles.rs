@@ -204,24 +204,24 @@ pub fn toggle_slider() -> Style {
 pub fn overlay_style() -> Style {
   Style::new(css!(
   r#"
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
 
-  &.is-opened {
-      opacity: 1;
-      visibility: visible;
-  }
+        &.is-opened {
+            opacity: 1;
+            visibility: visible;
+        }
   "#
 ))
 .unwrap()
@@ -230,14 +230,14 @@ pub fn overlay_style() -> Style {
 pub fn menu_style() -> Style {
   Style::new(css!(
   r#"
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  z-index: 20;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        z-index: 20;
   "#
 ))
 .unwrap()
@@ -283,3 +283,16 @@ pub fn button_style() -> Style {
 .unwrap()
 }
 
+pub fn menu_list_style() -> Style {
+  Style::new(css!(
+      r#"
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      "#
+  ))
+  .unwrap()
+}
