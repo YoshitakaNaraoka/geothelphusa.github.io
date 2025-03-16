@@ -130,6 +130,17 @@ pub fn nav_styles() -> Style {
           list-style: none;
           max-width: 100%; /* 画面幅に応じてサイズを調整 */
           max-height: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 60px;
+          background: rgba(0, 0, 0, 0.8); /* 透明度を調整 */
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 20px;
+          z-index: 100;
       "#
   )).unwrap()
 }
@@ -155,8 +166,12 @@ pub fn li_none() -> Style {
 
 pub fn toggle_button() -> Style {
   Style::new(css!(
-      r#"
-            position: relative;
+      r#"   
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            z-index: 150;
+            
             display: flex;
             width: 56px;
             height: 28px;
@@ -209,14 +224,14 @@ pub fn overlay_style() -> Style {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.7);
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 10;
+        z-index: 200; /* nav より前面に */
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s, visibility 0.3s;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
 
         &.is-opened {
             opacity: 1;
