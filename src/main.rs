@@ -11,21 +11,21 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     let stylesheet = style!(
         r#"
         .container {
-            width: 100%;
-            height: 100%;
+            width: 95%; /* 画面幅に合わせてコンテナの幅を調整 */
+            max-width: 1200px; /* 最大幅を設定 */
+            margin: 0 auto; /* 中央寄せ */
+            height: auto; /* 高さを自動調整 */
         }
 
         @media (min-width: 768px) {
             .container {
                 width: 70%;
-                height: 70%;
             }
         }
 
         @media (min-width: 1200px) {
             .container {
                 width: 50%;
-                height: 50%;
             }
         }
         "#
@@ -49,7 +49,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
             <body class={classes!(base_styles())}>
                 <div class={stylesheet}>
                     <nav class={classes!(nav_styles())}>
-                        <ul class={css!("display: flex;")}>
+                        <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
@@ -86,4 +86,80 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
 fn main() {
     yew::Renderer::<App>::new().render();
+}
+
+use stylist::{style, yew::styled_component, StyleFragment};
+use yew::prelude::*;
+
+#[derive(Properties, PartialEq)]
+pub struct MenuButtonProps {
+    pub onclick: Callback<MouseEvent>,
+    pub is_opened: bool,
+}
+
+#[styled_component(MenuButton)]
+pub fn menu_button(props: &MenuButtonProps) -> Html {
+    let style = style!(
+        r#"
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 6px;
+
+        &__line,
+        &::before,
+        &::after {
+            content: "";
+            width: 28px;
+            height: 2px;
+            background-color: #333333;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        &.is-opened &__line {
+            opacity: 0;
+        }
+
+        &.is-opened::before {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        &.is-opened::after {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        "#
+    )
+    .unwrap();
+
+    let class = if props.is_opened {
+        classes!("menu-button", "is-opened")
+    } else {
+        classes!("menu-button")
+    };
+
+    html! {
+        <button id="menuButton" type="button" class={classes!(class, style.get_class_name().clone())} aria-labelledby="menuButtonLabel" onclick={props.onclick.clone()}>
+            <StyleFragment r#style={style} />
+            <span class="menu-button__line">
+                <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
+            </span>
+        </button>
+    }
+}
+
+#[function_component(App)]
+pub fn app() -> Html {
+    let is_menu_opened = use_state(|| false);
+
+    let onclick = {
+        let is_menu_opened = is_menu_opened.clone();
+        Callback::from(move |_| {
+            is_menu_opened.set(!*is_menu_opened);
+        })
+    };
+
+    html! {
+        <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
+    }
 }
