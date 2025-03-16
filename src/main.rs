@@ -111,10 +111,11 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
     html! {
         <main>
-            <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
+            
             <body class={classes!(base_styles())}>
                 <div class={stylesheet}>
                         <nav class={classes!(nav_styles())}>
+                        <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
                             <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
                               <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
                               <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
