@@ -1,8 +1,12 @@
 mod styles;
+mod route;
 
 use stylist::{yew::styled_component, style};
 use yew::{prelude::*, Renderer};
+use yew_router::prelude::*;
 use crate::styles::*;
+use crate::route::*;
+
 #[derive(Properties, PartialEq)]
 pub struct MenuButtonProps {
     pub onclick: Callback<MouseEvent>,
