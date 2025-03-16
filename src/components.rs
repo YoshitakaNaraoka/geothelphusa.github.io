@@ -1,7 +1,7 @@
 use yew::prelude::*;
 use crate::styles::*;
 
-
+pub const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelphusa.github.io/refs/heads/main/static/Geothelphusa.jpeg";
 #[derive(Properties, PartialEq)]
 pub struct MenuButtonProps {
     pub onclick: Callback<MouseEvent>,
@@ -11,7 +11,6 @@ pub struct MenuButtonProps {
 
 #[function_component(MenuButton)]
 pub fn menu_button(props: &MenuButtonProps) -> Html {
-    
 
     let class = if props.is_opened {
         classes!(menu_button_style(), "is-opened")

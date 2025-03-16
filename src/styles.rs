@@ -1,5 +1,32 @@
 use stylist::{css, Style};
 
+pub fn responsive_styles() -> Style {
+  Style::new(css!(
+      r#"
+        .container {
+            width: 95%; /* 画面幅に合わせてコンテナの幅を調整 */
+            max-width: 1200px; /* 最大幅を設定 */
+            margin: 0 auto; /* 中央寄せ */
+            height: auto; /* 高さを自動調整 */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 70%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 50%;
+            }
+        }
+        "#
+  ))
+  .unwrap()
+}
+          
+
 pub fn center_styles() -> Style {
   Style::new(css!(
       r#"

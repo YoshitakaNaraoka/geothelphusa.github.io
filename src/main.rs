@@ -2,7 +2,7 @@ mod styles;
 mod route;
 mod components;
 
-use stylist::{yew::styled_component, style};
+use stylist::yew::styled_component;
 use yew::{prelude::*, Renderer};
 use yew_router::prelude::*;
 use crate::styles::*;
@@ -11,30 +11,8 @@ use crate::components::*;
 
 #[styled_component(App)]
 fn app() -> Html {
-const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelphusa.github.io/refs/heads/main/static/Geothelphusa.jpeg";
-    let stylesheet = style!(
-        r#"
-        .container {
-            width: 95%; /* 画面幅に合わせてコンテナの幅を調整 */
-            max-width: 1200px; /* 最大幅を設定 */
-            margin: 0 auto; /* 中央寄せ */
-            height: auto; /* 高さを自動調整 */
-        }
 
-        @media (min-width: 768px) {
-            .container {
-                width: 70%;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                width: 50%;
-            }
-        }
-        "#
-    )
-    .unwrap();
+    let stylesheet = responsive_styles();
 
     let logo_path = LOGO_PATH;
 
