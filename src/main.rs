@@ -49,6 +49,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
         // モードの状態を保持する変数(初期値はライトモード)
     let dark_mode = use_state(|| true);
+    let dark_mode_clone = dark_mode.clone();
 
     let mut main_classes = Classes::new();
     main_classes.push(container_styles());
@@ -59,7 +60,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     };
 
     html! {
-        <main class={classes!(base_styles())}>
+        <main class={classes!(main_classes, base_styles())}>
             <div class={stylesheet}>
                 <BrowserRouter>
                     <nav class={classes!(nav_styles())}>
@@ -97,7 +98,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                     <input 
                         type="checkbox" 
                         class={classes!(toggle_slider())}
-                        onchange={Callback::from(move |_| dark_mode.set(!*dark_mode))}
+                        oninput={Callback::from(move |_| dark_mode_clone.set(!*dark_mode_clone))}
                         checked={*dark_mode}
                     />  
                 </label>
@@ -110,7 +111,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                 </div>
                 <h1>{"Welcome to Geothelphusa site !"}</h1>
                 <div class={classes!(center_styles())}>
-                    //<p class={css!("align-items:flex-end;")}>{ if *dark_mode { "Dark" } else { "Light" } }</p>
+                    <p class={css!("align-items:flex-end;")}>{ if *dark_mode { "Dark" } else { "Light" } }</p>
                 </div>
             </div>
         </main>
