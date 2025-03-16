@@ -1,9 +1,8 @@
 mod styles;
 
 use stylist::{yew::styled_component, style};
-use yew::prelude::*;
+use yew::{prelude::*, Renderer};
 use crate::styles::*;
-
 #[derive(Properties, PartialEq)]
 pub struct MenuButtonProps {
     pub onclick: Callback<MouseEvent>,
@@ -11,7 +10,7 @@ pub struct MenuButtonProps {
 }
 
 
-#[styled_component(MenuButton)]
+#[function_component(MenuButton)]
 pub fn menu_button(props: &MenuButtonProps) -> Html {
     let style = style!(
         r#"
@@ -53,8 +52,7 @@ pub fn menu_button(props: &MenuButtonProps) -> Html {
     };
 
     html! {
-        <button id="menuButton" type="button" class={classes!(class, style.get_class_name().clone())} aria-labelledby="menuButtonLabel" onclick={props.onclick.clone()}>
-            <StyleFragment r#style={style} />
+        <button id="menuButton" type="button" class={classes!(class, style)} aria-labelledby="menuButtonLabel" onclick={props.onclick.clone()}>
             <span class="menu-button__line">
                 <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
             </span>
@@ -100,10 +98,6 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
         })
     };
 
-    html! {
-        <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
-    }
-
     // モードの状態を保持する変数(初期値はライトモード)
     let dark_mode = use_state(|| true);
 
@@ -116,54 +110,47 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     };
 
     html! {
+        <main>
+            <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
             <body class={classes!(base_styles())}>
                 <div class={stylesheet}>
-                    <nav class={classes!(nav_styles())}>
-                        <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
-                          <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
-                        </ul>
-                        <label class={classes!(toggle_button())}>
-                            <input 
-                                type="checkbox" 
-                                class={classes!(toggle_slider())}
-                                onchange={
-                                    let dark_mode = dark_mode.clone();
-                                    Callback::from(move |_| dark_mode.set(!*dark_mode))
-                                }
-                            checked={*dark_mode}/>  
-                        </label>
-                    </nav>
-                    <main class={main_classes}>
-                        <div class={classes!(center_styles())}>
-                            <a href="https://github.com/Geothelphusa">
-                                <img class={classes!(title_logo())} src={logo_path}/>
-                            </a>
-                        </div>
+                        <nav class={classes!(nav_styles())}>
+                            <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
+                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
+                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
+                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
+                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
+                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
+                            </ul>
+                            <label class={classes!(toggle_button())}>
+                                <input 
+                                    type="checkbox" 
+                                    class={classes!(toggle_slider())}
+                                    onchange={
+                                        let dark_mode = dark_mode.clone();
+                                        Callback::from(move |_| dark_mode.set(!*dark_mode))
+                                    }
+                                checked={*dark_mode}/>  
+                            </label>
+                        </nav>
+                        <main class={main_classes}>
+                            <div class={classes!(center_styles())}>
+                                <a href="https://github.com/Geothelphusa">
+                                    <img class={classes!(title_logo())} src={logo_path}/>
+                                </a>
+                            </div>
 
-                        <h1>{"Welcome to Geothelphusa site !"}</h1>
-                        <div class={classes!(center_styles())}>
-                        <p class={css!("align-items:flex-end;")}>{if *dark_mode {"Dark"} else {"Light"}}</p>
-                        </div>
-                    </main>
+                            <h1>{"Welcome to Geothelphusa site !"}</h1>
+                            <div class={classes!(center_styles())}>
+                            <p class={css!("align-items:flex-end;")}>{if *dark_mode {"Dark"} else {"Light"}}</p>
+                            </div>
+                        </main>
                 </div>
             </body>
+        </main>
     }
 }
 
 fn main() {
-    yew::Renderer::<App>::new().render();
-}
-
-use stylist::StyleFragment;
-
-
-
-
-#[function_component(App)]
-pub fn app() -> Html {
-    
+    Renderer::<App>::new().render();
 }
