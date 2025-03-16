@@ -70,50 +70,21 @@ pub fn container_styles() -> Style {
   .unwrap()
 }
 
-// pub fn row_styles() -> Style {
-//   Style::new(css!(
-//       r#"
-//           display: flex;
-//           justify-content: center;
-//       "#
-//   ))
-//   .unwrap()
-// }
-
-// pub fn input_and_button() -> Style {
-//   Style::new(css!(
-//       r#"
-//           border-radius: 8px;
-//           border: 1px solid transparent;
-//           padding: 0.6em 1.2em;
-//           font-size: 1em;
-//           font-weight: 500;
-//           font-family: inherit;
-//           color: #0f0f0f;
-//           background-color: #ffffff;
-//           transition: border-color 0.25s;
-//           box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-//           outline: none;
-//       "#
-//   )).unwrap()
-// }
-
-// pub fn fit_picture() -> Style {
-//   Style::new(css!(
-//       r#"
-//           width: 100%;
-//           height: auto;
-//       "#
-//   )).unwrap()
-// }
 
 pub fn title_logo() -> Style {
   Style::new(css!(
       r#"
           width: 500px;
           height: 500px;
-          max-width: 90%; /* 画面幅に応じてサイズを調整 */
-          max-height: 70%;
+          max-width: 100%;
+          max-height: 100%;
+
+          @media (max-width: 768px) { /* 768px以下（スマホなど）の場合 width/height は 3/4 にする */
+              width: 300px;
+              height: 300px;
+              max-width: 75%;
+              max-height: 100%;
+          }
       "#
   )).unwrap()
 }
@@ -147,13 +118,6 @@ pub fn menu_items() -> Style {
   )).unwrap()
 }
 
-// pub fn li_none() -> Style {
-//   Style::new(css!(
-//       r#"
-//           list-style: none;
-//       "#
-//   )).unwrap()
-// }
 
 pub fn toggle_button() -> Style {
   Style::new(css!(
@@ -201,7 +165,7 @@ pub fn toggle_slider() -> Style {
 
           :checked {
             left: calc(100% - 32px);
-            background-color: #4ade80;
+            background-color: #2f2f2f;
           }
       "#
   )).unwrap()
@@ -255,45 +219,6 @@ pub fn menu_style() -> Style {
 .unwrap()
 }
 
-// pub fn button_style() -> Style {
-//   Style::new(css!(
-//   r#"
-//   width: 40px;
-//   height: 40px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   row-gap: 6px;
-//   background: white;
-//   border: 1px solid #333;
-//   border-radius: 4px;
-
-//   &__line,
-//   &::before,
-//   &::after {
-//       content: "";
-//       width: 28px;
-//       height: 2px;
-//       background-color: #333;
-//       transition: transform 0.3s, opacity 0.3s;
-//   }
-
-//   &.is-opened &__line {
-//       opacity: 0;
-//   }
-
-//   &.is-opened::before {
-//       transform: translateY(8px) rotate(45deg);
-//   }
-
-//   &.is-opened::after {
-//       transform: translateY(-8px) rotate(-45deg);
-//   }
-//   "#
-// ))
-// .unwrap()
-// }
 
 pub fn menu_list_style() -> Style {
   Style::new(css!(
