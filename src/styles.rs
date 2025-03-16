@@ -237,3 +237,40 @@ pub fn menu_list_style() -> Style {
   ))
   .unwrap()
 }
+
+pub fn menu_button_style() -> Style {
+  Style::new(css!(
+      r#"
+      height: 45px;
+      width: 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 6px;
+
+      &__line,
+      &::before,
+      &::after {
+          content: "";
+          width: 28px;
+          height: 2px;
+          background-color: #333333;
+          transition: transform 0.3s, opacity 0.3s;
+      }
+
+      &.is-opened &__line {
+          opacity: 0;
+      }
+
+      &.is-opened::before {
+          transform: translateY(8px) rotate(45deg);
+      }
+
+      &.is-opened::after {
+          transform: translateY(-8px) rotate(-45deg);
+      }
+      "#
+  ))
+  .unwrap()
+}

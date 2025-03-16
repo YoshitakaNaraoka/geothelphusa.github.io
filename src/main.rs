@@ -16,49 +16,16 @@ pub struct MenuButtonProps {
 
 #[function_component(MenuButton)]
 pub fn menu_button(props: &MenuButtonProps) -> Html {
-    let style = style!(
-        r#"
-        height: 45px;
-        width: 45px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        row-gap: 6px;
-
-        &__line,
-        &::before,
-        &::after {
-            content: "";
-            width: 28px;
-            height: 2px;
-            background-color: #333333;
-            transition: transform 0.3s, opacity 0.3s;
-        }
-
-        &.is-opened &__line {
-            opacity: 0;
-        }
-
-        &.is-opened::before {
-            transform: translateY(8px) rotate(45deg);
-        }
-
-        &.is-opened::after {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-        "#
-    )
-    .unwrap();
+    
 
     let class = if props.is_opened {
-        classes!("menu-button", "is-opened")
+        classes!(menu_button_style(), "is-opened")
     } else {
-        classes!("menu-button")
+        classes!(menu_button_style())
     };
 
     html! {
-        <button id="menuButton" type="button" class={classes!(class, style)} aria-labelledby="menuButtonLabel" onclick={props.onclick.clone()}>
+        <button id="menuButton" type="button" class={classes!(class, menu_button_style())} aria-labelledby="menuButtonLabel" onclick={props.onclick.clone()}>
             <span class="menu-button__line">
                 <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
             </span>
