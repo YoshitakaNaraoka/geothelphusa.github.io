@@ -97,7 +97,6 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     };
 
     let onclick_clone = onclick.clone();
-    let onclick_clone2 = onclick.clone();
 
         // モードの状態を保持する変数(初期値はライトモード)
     let dark_mode = use_state(|| true);

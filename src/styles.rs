@@ -112,8 +112,8 @@ pub fn title_logo() -> Style {
       r#"
           width: 500px;
           height: 500px;
-          max-width: 100%; /* 画面幅に応じてサイズを調整 */
-          max-height: 100%;
+          max-width: 90%; /* 画面幅に応じてサイズを調整 */
+          max-height: 70%;
       "#
   )).unwrap()
 }
@@ -126,7 +126,7 @@ pub fn nav_styles() -> Style {
           left: 0;
           width: 100%;
           height: 100px; /* 画面上端まで拡張 */
-          background: black;
+          background: #2f2f2f;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -141,19 +141,19 @@ pub fn menu_items() -> Style {
       r#"
           display: block;
           text-decoration: none;
-          color: white;
+          color: black;
           margin-right: 35px;
       "#
   )).unwrap()
 }
 
-pub fn li_none() -> Style {
-  Style::new(css!(
-      r#"
-          list-style: none;
-      "#
-  )).unwrap()
-}
+// pub fn li_none() -> Style {
+//   Style::new(css!(
+//       r#"
+//           list-style: none;
+//       "#
+//   )).unwrap()
+// }
 
 pub fn toggle_button() -> Style {
   Style::new(css!(
@@ -215,7 +215,7 @@ pub fn overlay_style() -> Style {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.9); /* 透明度を少し暗めに */
+        background: rgba(0, 0, 0, 0.8); /* 透明度を少し暗めに */
         display: flex;
         flex-direction: column;
         justify-content: center; /* 中央配置 */
@@ -255,45 +255,45 @@ pub fn menu_style() -> Style {
 .unwrap()
 }
 
-pub fn button_style() -> Style {
-  Style::new(css!(
-  r#"
-  width: 40px;
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  row-gap: 6px;
-  background: white;
-  border: 1px solid #333;
-  border-radius: 4px;
+// pub fn button_style() -> Style {
+//   Style::new(css!(
+//   r#"
+//   width: 40px;
+//   height: 40px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   row-gap: 6px;
+//   background: white;
+//   border: 1px solid #333;
+//   border-radius: 4px;
 
-  &__line,
-  &::before,
-  &::after {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background-color: #333;
-      transition: transform 0.3s, opacity 0.3s;
-  }
+//   &__line,
+//   &::before,
+//   &::after {
+//       content: "";
+//       width: 28px;
+//       height: 2px;
+//       background-color: #333;
+//       transition: transform 0.3s, opacity 0.3s;
+//   }
 
-  &.is-opened &__line {
-      opacity: 0;
-  }
+//   &.is-opened &__line {
+//       opacity: 0;
+//   }
 
-  &.is-opened::before {
-      transform: translateY(8px) rotate(45deg);
-  }
+//   &.is-opened::before {
+//       transform: translateY(8px) rotate(45deg);
+//   }
 
-  &.is-opened::after {
-      transform: translateY(-8px) rotate(-45deg);
-  }
-  "#
-))
-.unwrap()
-}
+//   &.is-opened::after {
+//       transform: translateY(-8px) rotate(-45deg);
+//   }
+//   "#
+// ))
+// .unwrap()
+// }
 
 pub fn menu_list_style() -> Style {
   Style::new(css!(
