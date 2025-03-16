@@ -121,21 +121,12 @@ pub fn title_logo() -> Style {
 pub fn nav_styles() -> Style {
   Style::new(css!(
       r#"
-          width: 100%;
-          height: 70px;
-          background-color: dimgray;
-          padding-top: 5px;
-          box-sizing: border-box;
-          display: flex;
-          list-style: none;
-          max-width: 100%; /* 画面幅に応じてサイズを調整 */
-          max-height: 100%;
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
-          height: 60px;
-          background: rgba(0, 0, 0, 0.8); /* 透明度を調整 */
+          height: 100px; /* 画面上端まで拡張 */
+          background: black;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -224,10 +215,11 @@ pub fn overlay_style() -> Style {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.9); /* 透明度を少し暗めに */
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center; /* 中央配置 */
+        align-items: center; /* 中央配置 */
         z-index: 200; /* nav より前面に */
         opacity: 0;
         visibility: hidden;
@@ -246,13 +238,18 @@ pub fn menu_style() -> Style {
   Style::new(css!(
   r#"
         background: white;
-        padding: 20px;
+        padding: 40px;
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
-        row-gap: 10px;
-        z-index: 20;
+        row-gap: 20px;
+        align-items: center;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        z-index: 201;
+
   "#
 ))
 .unwrap()
@@ -307,6 +304,10 @@ pub fn menu_list_style() -> Style {
       display: flex;
       flex-direction: column;
       align-items: center;
+      row-gap: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
       "#
   ))
   .unwrap()

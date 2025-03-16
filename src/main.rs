@@ -137,7 +137,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                             }
                         } else {
                             html! {}
-                        }}                        
+                        }}                                          
 
                         // ハンバーガーボタン
                         // <button id="menuButton" type="button" class={classes!(button_style(), if *is_menu_opened { "is-opened" } else { "" })} 
