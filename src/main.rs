@@ -1,37 +1,13 @@
 mod styles;
 mod route;
+mod components;
 
 use stylist::{yew::styled_component, style};
 use yew::{prelude::*, Renderer};
 use yew_router::prelude::*;
 use crate::styles::*;
 use crate::route::*;
-
-#[derive(Properties, PartialEq)]
-pub struct MenuButtonProps {
-    pub onclick: Callback<MouseEvent>,
-    pub is_opened: bool,
-}
-
-
-#[function_component(MenuButton)]
-pub fn menu_button(props: &MenuButtonProps) -> Html {
-    
-
-    let class = if props.is_opened {
-        classes!(menu_button_style(), "is-opened")
-    } else {
-        classes!(menu_button_style())
-    };
-
-    html! {
-        <button id="menuButton" type="button" class={classes!(class, menu_button_style())} aria-labelledby="menuButtonLabel" onclick={props.onclick.clone()}>
-            <span class="menu-button__line">
-                <span id="menuButtonLabel" style="display: none">{"メニューボタン"}</span>
-            </span>
-        </button>
-    }
-}
+use crate::components::*;
 
 #[styled_component(App)]
 fn app() -> Html {
@@ -87,9 +63,11 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
             
             <body class={classes!(base_styles())}>
                 <div class={stylesheet}>
+                <BrowserRouter>
                 <nav class={classes!(nav_styles())}>
                     <MenuButton onclick={onclick_clone} is_opened={*is_menu_opened} />
                 </nav>
+                </BrowserRouter>
                     <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
                         // オーバーレイ表示（ハンバーガーメニューを開いたとき）
                         { if *is_menu_opened {
@@ -97,12 +75,25 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                                 <div class={classes!(overlay_style(), "is-opened")} onclick={onclick.clone()}>
                                     <div class={classes!(menu_style())} onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
                                         <ul class={classes!(menu_list_style())}>
-                                            <li><a class={classes!(menu_items())} href="#">{"ABOUT"}</a></li>
-                                            <li><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
-                                            <li><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
-                                            <li><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
-                                            <li><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
-                                            <li><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
+                                            <li><Link<Route> to={Route::About} classes={classes!(menu_items())}>
+                                            { "ABOUT" }
+                                        </Link<Route>></li>
+                                            <li><Link<Route> to={Route::Home} classes={classes!(menu_items())}>
+                                            { "HOME" }
+                                        </Link<Route>></li>
+                                            <li><Link<Route> to={Route::Service} classes={classes!(menu_items())}>
+                                            { "SERVICE" }
+                                        </Link<Route>></li>
+                                            <li><Link<Route> to={Route::News} classes={classes!(menu_items())}>
+                                            { "NEWS" }
+                                        </Link<Route>></li>
+                                            <li><Link<Route> to={Route::Blog} classes={classes!(menu_items())}>
+                                            { "BLOG" }
+                                        </Link<Route>></li>
+                                            <li><Link<Route> to={Route::Contact} classes={classes!(menu_items())}>
+                                            { "CONTACT" }
+                                        </Link<Route>></li>
+                                            <Switch<Route> render={switch} />
                                         </ul>
                                     </div>
                                 </div>
