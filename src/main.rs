@@ -47,7 +47,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
     let onclick_clone = onclick.clone();
 
-        // モードの状態を保持する変数(初期値はライトモード)
+        // Brightness mode handling (init:dark)
     let dark_mode = use_state(|| true);
     let dark_mode_clone = dark_mode.clone();
 
@@ -93,7 +93,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                     <Switch<Route> render={switch} />
                 </BrowserRouter>
     
-                // ダークモード切り替え
+                // Brightness mode switch
                 <label class={classes!(toggle_button())}>
                     <input 
                         type="checkbox" 
@@ -103,7 +103,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                     />  
                 </label>
     
-                // メインコンテンツ
+                // main containts
                 <div class={classes!(center_styles())}>
                     <a href="https://github.com/Geothelphusa">
                         <img class={classes!(title_logo())} src={logo_path}/>
