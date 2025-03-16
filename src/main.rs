@@ -59,41 +59,28 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
     };
 
     html! {
-        <main>
-            
-            <body class={classes!(base_styles())}>
-                <div class={stylesheet}>
+        <main class={classes!(base_styles())}>
+            <div class={stylesheet}>
                 <BrowserRouter>
-                <nav class={classes!(nav_styles())}>
-                    <MenuButton onclick={onclick_clone} is_opened={*is_menu_opened} />
-                </nav>
-                </BrowserRouter>
+                    <nav class={classes!(nav_styles())}>
+                        <MenuButton onclick={onclick_clone} is_opened={*is_menu_opened} />
+                    </nav>
                     <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
-                        // オーバーレイ表示（ハンバーガーメニューを開いたとき）
                         { if *is_menu_opened {
                             html! {
                                 <div class={classes!(overlay_style(), "is-opened")} onclick={onclick.clone()}>
                                     <div class={classes!(menu_style())} onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
                                         <ul class={classes!(menu_list_style())}>
-                                            <li><Link<Route> to={Route::About} classes={classes!(menu_items())}>
-                                            { "ABOUT" }
-                                        </Link<Route>></li>
-                                            <li><Link<Route> to={Route::Home} classes={classes!(menu_items())}>
-                                            { "HOME" }
-                                        </Link<Route>></li>
-                                            <li><Link<Route> to={Route::Service} classes={classes!(menu_items())}>
-                                            { "SERVICE" }
-                                        </Link<Route>></li>
-                                            <li><Link<Route> to={Route::News} classes={classes!(menu_items())}>
-                                            { "NEWS" }
-                                        </Link<Route>></li>
-                                            <li><Link<Route> to={Route::Blog} classes={classes!(menu_items())}>
-                                            { "BLOG" }
-                                        </Link<Route>></li>
-                                            <li><Link<Route> to={Route::Contact} classes={classes!(menu_items())}>
-                                            { "CONTACT" }
-                                        </Link<Route>></li>
-                                            <Switch<Route> render={switch} />
+                                            { for vec![
+                                                (Route::About, "ABOUT"),
+                                                (Route::Home, "HOME"),
+                                                (Route::Service, "SERVICE"),
+                                                (Route::News, "NEWS"),
+                                                (Route::Blog, "BLOG"),
+                                                (Route::Contact, "CONTACT"),
+                                            ].into_iter().map(|(route, label)| html! {
+                                                <li><Link<Route> to={route} classes={classes!(menu_items())}>{ label }</Link<Route>></li>
+                                            }) }
                                         </ul>
                                     </div>
                                 </div>
@@ -102,33 +89,33 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                             html! {}
                         }}
                     </ul>
-                    
-                            <label class={classes!(toggle_button())}>
-                                <input 
-                                    type="checkbox" 
-                                    class={classes!(toggle_slider())}
-                                    onchange={
-                                        let dark_mode = dark_mode.clone();
-                                        Callback::from(move |_| dark_mode.set(!*dark_mode))
-                                    }
-                                checked={*dark_mode}/>  
-                            </label>
-                        <main class={main_classes}>
-                            <div class={classes!(center_styles())}>
-                                <a href="https://github.com/Geothelphusa">
-                                    <img class={classes!(title_logo())} src={logo_path}/>
-                                </a>
-                            </div>
-
-                            <h1>{"Welcome to Geothelphusa site !"}</h1>
-                            <div class={classes!(center_styles())}>
-                            <p class={css!("align-items:flex-end;")}>{if *dark_mode {"Dark"} else {"Light"}}</p>
-                            </div>
-                        </main>
+                    <Switch<Route> render={switch} />
+                </BrowserRouter>
+    
+                // ダークモード切り替え
+                <label class={classes!(toggle_button())}>
+                    <input 
+                        type="checkbox" 
+                        class={classes!(toggle_slider())}
+                        onchange={Callback::from(move |_| dark_mode.set(!*dark_mode))}
+                        checked={*dark_mode}
+                    />  
+                </label>
+    
+                // メインコンテンツ
+                <div class={classes!(center_styles())}>
+                    <a href="https://github.com/Geothelphusa">
+                        <img class={classes!(title_logo())} src={logo_path}/>
+                    </a>
                 </div>
-            </body>
+                <h1>{"Welcome to Geothelphusa site !"}</h1>
+                <div class={classes!(center_styles())}>
+                    //<p class={css!("align-items:flex-end;")}>{ if *dark_mode { "Dark" } else { "Light" } }</p>
+                </div>
+            </div>
         </main>
     }
+    
 }
 
 fn main() {
