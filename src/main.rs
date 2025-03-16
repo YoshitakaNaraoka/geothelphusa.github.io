@@ -1,12 +1,37 @@
 mod styles;
 
-use stylist::yew::styled_component;
+use stylist::{yew::styled_component, style};
 use yew::prelude::*;
 use crate::styles::*;
 
 #[styled_component(App)]
+
 fn app() -> Html {
 const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelphusa.github.io/refs/heads/main/static/Geothelphusa.jpeg";
+    let stylesheet = style!(
+        r#"
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 70%;
+                height: 70%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 50%;
+                height: 50%;
+            }
+        }
+        "#
+    )
+    .unwrap();
+
     let logo_path = LOGO_PATH;
 
     // モードの状態を保持する変数(初期値はライトモード)
@@ -22,7 +47,7 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
 
     html! {
             <body class={classes!(base_styles())}>
-                <div>
+                <div class={stylesheet}>
                     <nav class={classes!(nav_styles())}>
                         <ul class={css!("display: flex;")}>
                           <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>

@@ -112,6 +112,8 @@ pub fn title_logo() -> Style {
       r#"
           width: 500px;
           height: 500px;
+          max-width: 100%; /* 画面幅に応じてサイズを調整 */
+          max-height: 100%;
       "#
   )).unwrap()
 }
@@ -126,6 +128,8 @@ pub fn nav_styles() -> Style {
           box-sizing: border-box;
           display: flex;
           list-style: none;
+          max-width: 100%; /* 画面幅に応じてサイズを調整 */
+          max-height: 100%;
       "#
   )).unwrap()
 }
