@@ -116,13 +116,23 @@ const LOGO_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geothelp
                 <div class={stylesheet}>
                         <nav class={classes!(nav_styles())}>
                         <MenuButton onclick={onclick} is_opened={*is_menu_opened} />
-                            <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
-                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
-                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
-                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
-                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
-                              <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
-                            </ul>
+                        <ul class={css!("display: flex; flex-direction: column; @media (min-width: 768px) {flex-direction: row;}")}>
+                        { if *is_menu_opened {
+                            html! {
+                                <>
+                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"ABOUT"}</a></li>
+                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"HOME"}</a></li>
+                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"SERVICE"}</a></li>
+                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"NEWS"}</a></li>
+                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"BLOG"}</a></li>
+                                    <li class={classes!(li_none())}><a class={classes!(menu_items())} href="#">{"CONTACT"}</a></li>
+                                </>
+                            }
+                        } else {
+                            html! {}
+                        }}
+                    </ul>
+                    
                             <label class={classes!(toggle_button())}>
                                 <input 
                                     type="checkbox" 
