@@ -2,5 +2,3 @@
 Cargo.lock
 index.html
 /dist
-# Webhook URL を含むビルド生成ファイルを無視
-/webhook.rs

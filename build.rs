@@ -40,27 +40,20 @@ const FAVICON_PATH: &str = "https://raw.githubusercontent.com/Geothelphusa/geoth
     
     println!("cargo:rerun-if-env-changed=CARGO_WEBHOOK_URL");
 
-    if let Ok(webhook_url) = std::env::var("CARGO_WEBHOOK_URL") {
-        println!("cargo:rustc-env=WEBHOOK_URL={}", webhook_url);
-    }
-    let webhook_url = env::var("WEBHOOK_URL").expect("WEBHOOK_URL not found in env");
-    
+    // `CARGO_WEBHOOK_URL` 環境変数を取得
+    let webhook_url = env::var("CARGO_WEBHOOK_URL").expect("CARGO_WEBHOOK_URL not set");
+
+    // `WEBHOOK_URL` をコンパイル時に埋め込む
+    println!("cargo:rustc-env=WEBHOOK_URL={}", webhook_url);
+
+    // `OUT_DIR` のパスを取得
     let out_dir = env::var("OUT_DIR").unwrap();
     let dest_path = Path::new(&out_dir).join("webhook.rs");
-
-    fs::write(dest_path, format!("pub const WEBHOOK_URL: &str = \"{}\";", webhook_url))
-        .expect("Failed to write webhook URL to file");
-    // ビルド時の出力ディレクトリを取得
-    let out_dir = env::var("OUT_DIR").unwrap();
-    let dest_path = Path::new(&out_dir).join("webhook.rs");
-
-    // `WEBHOOK_URL` を環境変数から取得
-    let webhook_url = env::var("WEBHOOK_URL").expect("WEBHOOK_URL not set");
 
     // `webhook.rs` の内容を生成
     let content = format!(r#"pub const WEBHOOK_URL: &str = "{}";"#, webhook_url);
 
-    // ファイルを書き込み
+    // `webhook.rs` を作成
     fs::write(dest_path, content).expect("Failed to write webhook.rs");
 }
 
