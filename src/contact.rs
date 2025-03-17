@@ -1,9 +1,12 @@
+use webhook;
 use gloo_net::http::Request;
 use wasm_bindgen_futures::spawn_local;
-use web_sys::{HtmlInputElement, HtmlTextAreaElement};
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
-const WEBHOOK_URL: &str = env!("WEBHOOK_URL");
+fn get_webhook_url() -> &'static str {
+    webhook::WEBHOOK_URL
+}
 
 #[function_component(Contact)]
 pub fn contact() -> Html {
@@ -13,36 +16,24 @@ pub fn contact() -> Html {
     let on_submit = {
         let name = name.clone();
         let message = message.clone();
-
         Callback::from(move |e: SubmitEvent| {
-            e.prevent_default(); // フォーム送信を防ぐ
+            e.prevent_default();
             let name = name.clone();
             let message = message.clone();
 
             spawn_local(async move {
+                let webhook_url = get_webhook_url();
+
                 let payload = serde_json::json!({
                     "content": format!("**お問い合わせ**\n**名前:** {}\n**メッセージ:** {}", *name, *message)
                 });
 
-                let response = Request::post(WEBHOOK_URL)
+                let _ = Request::post(webhook_url)
                     .header("Content-Type", "application/json")
                     .body(serde_json::to_string(&payload).unwrap())
                     .unwrap()
                     .send()
                     .await;
-
-                match response {
-                    Ok(resp) => {
-                        if resp.status() == 204 {
-                            web_sys::console::log_1(&"送信成功".into());
-                        } else {
-                            web_sys::console::log_1(&format!("エラー: {}", resp.status()).into());
-                        }
-                    }
-                    Err(err) => {
-                        web_sys::console::log_1(&format!("リクエスト失敗: {:?}", err).into());
-                    }
-                }
             });
         })
     };
@@ -65,8 +56,8 @@ pub fn contact() -> Html {
                 id="message"
                 value={(*message).clone()}
                 oninput={Callback::from(move |e: InputEvent| {
-                    let textarea: HtmlTextAreaElement = e.target_unchecked_into();
-                    message.set(textarea.value());
+                    let input: HtmlInputElement = e.target_unchecked_into();
+                    message.set(input.value());
                 })}
             ></textarea>
 
