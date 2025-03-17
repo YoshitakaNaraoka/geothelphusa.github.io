@@ -1,11 +1,14 @@
 use gloo_net::http::Request;
+use std::env;
 use wasm_bindgen_futures::spawn_local;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
-use std::env;
 
-const WEBHOOK_URL: &str = env!("WEBHOOK_URL");
-
+fn get_webhook_url() -> String {
+    env::var("WEBHOOK_URL").unwrap_or_else(|_| {
+        panic!("WEBHOOK_URL environment variable not set")
+    })
+}
 #[function_component(Contact)]
 pub fn contact() -> Html {
     let name = use_state(|| String::new());
@@ -20,13 +23,12 @@ pub fn contact() -> Html {
             let message = message.clone();
 
             spawn_local(async move {
-                // let webhook_url = "https://discord.com/api/webhooks/XXXX/XXXX"; // 🔴 あなたのWebhook URLに変更
+                let webhook_url = get_webhook_url();
 
                 let payload = serde_json::json!({
                     "content": format!("**お問い合わせ**\n**名前:** {}\n**メッセージ:** {}", *name, *message)
                 });
-
-                let _ = Request::post(WEBHOOK_URL)
+                let _ = Request::post(webhook_url.as_str())
                     .header("Content-Type", "application/json")
                     .body(serde_json::to_string(&payload).unwrap())
                     .unwrap()
