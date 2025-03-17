@@ -1,6 +1,6 @@
 use crate::webhook;
 
-use log::info;
+use log::debug;
 use gloo_net::http::Request;
 use wasm_bindgen_futures::spawn_local;
 use web_sys::HtmlInputElement;
@@ -23,9 +23,6 @@ pub fn contact() -> Html {
             spawn_local(async move {
                 let webhook_url = webhook::WEBHOOK_URL;
 
-                // ここで webhook URL をログ出力
-                info!("Webhook URL: {}", webhook_url);
-
                 let payload = serde_json::json!({
                     "content": format!("**お問い合わせ**\n**名前:** {}\n**メッセージ:** {}", *name, *message)
                 });
@@ -38,7 +35,7 @@ pub fn contact() -> Html {
                     .await;
 
                 match response {
-                    Ok(resp) => info!("Response: {:?}", resp),
+                    Ok(resp) => debug!("Response: {:?}", resp),
                     Err(err) => log::error!("Failed to send webhook: {:?}", err),
                 }
             });
