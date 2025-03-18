@@ -22,6 +22,8 @@ jobs:
           override: true
       - name: Install Trunk
         run: cargo install trunk
+      - name: Set up Form URL
+        run: echo "FORM_URL=${{ secrets.FORM_URL }}" >> $GITHUB_ENV # お問い合わせページの URL を環境変数に設定
       - name: Set up Webhook URL
         run: echo "CARGO_WEBHOOK_URL=${CARGO_WEBHOOK_URL}" >> $GITHUB_ENV # お問い合わせページの Webhook URL を環境変数に設定
       - name: Build

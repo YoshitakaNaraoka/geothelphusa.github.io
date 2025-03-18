@@ -48,7 +48,10 @@ pub fn contact() -> Html {
             });
 
             spawn_local(async move {
-                let form_url = "";
+                let form_url = match std::env::var("FORM_URL") {
+                    Ok(url) => url,
+                    Err(err) => return log::error!("Failed to get FORM_URL: {:?}", err),
+                };
                 let data = format!(
                     "entry.12345678={}&entry.87654321={}&entry.13579246={}",
                     *name,
@@ -56,13 +59,10 @@ pub fn contact() -> Html {
                     *contents
                 );
 
-                let form_submit_request = Request::post(form_url)
+                let form_submit_request = Request::post(&form_url)
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .body(data);                
-                let form_submit = match form_submit_request{
-                    Ok(req) => req.send().await,
-                    Err(err) => Err(err),
-                };
+                let form_submit = form_submit_request.unwrap().send().await;
                 
                 match form_submit {
                     Ok(response) => log::info!("送信成功！ありがとうございます。Response: {:?}", response),
