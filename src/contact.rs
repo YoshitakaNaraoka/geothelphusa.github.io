@@ -24,14 +24,15 @@ pub fn contact() -> Html {
             let address = address.clone();
             let contents = contents.clone();
 
+
             spawn_local(async move {
                 let form_url = "";
                 let webhook_url = webhook::WEBHOOK_URL;
 
                 let payload = serde_json::json!({
-                    "content": format!("**お問い合わせ**\n**名前:** {}\n**メッセージ:** {}", *name, *address, *contents,)
+                    "content": format!("**Contact**\n**Name:** {}\n**Message:** {}\n**Mail address:** {}", *name, *address, *contents,)
                 });
-
+                
                 let response = Request::post(webhook_url)
                     .header("Content-Type", "application/json")
                     .body(serde_json::to_string(&payload).unwrap())
@@ -44,23 +45,25 @@ pub fn contact() -> Html {
                     Err(err) => log::error!("Failed to send webhook: {:?}", err),
                 }
 
-                spawn_local(async move {
-                    // let form_url = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
-                    let data = format!(
-                        "entry.12345678={}&entry.87654321={}",
-                        name.as_str(),
-                        message.as_str()
-                    );
-    
-                    match Request::post(form_url)
-                        .header("Content-Type", "application/x-www-form-urlencoded")
-                        .body(data)
-                        .send()
-                        .await
-                    {
-                        Ok(_) => status.set("送信成功！ありがとうございます。".to_string()),
-                        Err(_) => status.set("送信失敗しました。もう一度試してください。".to_string()),
-                    };
+                
+                
+                // let form_url = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
+                let data = format!(
+                    "entry.12345678={}&entry.87654321={}&entry.13579246={}",
+                    *name,
+                    *address,
+                    *contents
+                );
+
+                match Request::post(form_url)
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .body(data)
+                    .send()
+                    .await
+                {
+                    Ok(_) => log::info!("送信成功！ありがとうございます。"),
+                    Err(_) => log::error!("送信失敗しました。もう一度試してください。"),
+                };
             });
         })
     };
