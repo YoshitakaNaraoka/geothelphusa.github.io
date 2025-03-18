@@ -18,15 +18,14 @@ pub fn contact() -> Html {
         let address = address.clone();
         let contents = contents.clone();
 
-        Callback::from(move |e: FocusEvent| {
+        Callback::from(move |e: SubmitEvent| {
             e.prevent_default();
             let name = name.clone();
             let address = address.clone();
-            let contents = contents.clone();
+            let contents = contents.clone(); 
 
 
             spawn_local(async move {
-                let form_url = "";
                 let webhook_url = webhook::WEBHOOK_URL;
 
                 let payload = serde_json::json!({
@@ -45,42 +44,51 @@ pub fn contact() -> Html {
                     Err(err) => log::error!("Failed to send webhook: {:?}", err),
                 }
 
+                
+            });
+
+            spawn_local(async move {
+                let form_url = "";
                 let data = format!(
                     "entry.12345678={}&entry.87654321={}&entry.13579246={}",
                     *name,
                     *address,
                     *contents
                 );
-                
+
                 let form_submit_request = Request::post(form_url)
                     .header("Content-Type", "application/x-www-form-urlencoded")
-                    .body(data)
-                    ;
+                    .body(data);                
+                let form_submit = match form_submit_request{
+                    Ok(req) => req.send().await,
+                    Err(err) => Err(err),
+                };
                 
-                let form_submit = form_submit_request.send().await;
-
                 match form_submit {
                     Ok(response) => log::info!("送信成功！ありがとうございます。Response: {:?}", response),
                     Err(err) => log::error!("送信失敗しました。もう一度試してください。Error: {:?}", err),
-                };
-            });
-        })
+                }
+        
+        });
+    })
     };
 
+
     html! {
-        <form onsubmit={on_submit}>
-            <label for="name">{ "名前: " }</label>
-            <input
-                id="name"
-                type="text"
-                value={(*name).clone()}
-                oninput={Callback::from(move |e: InputEvent| {
+        <>
+            <form onsubmit={on_submit}>
+                <label for="name">{ "名前: " }</label>
+                <input
+                    id="name"
+                    type="text"
+                    value={(*name).clone()}
+                    oninput={Callback::from(move |e: InputEvent| {
                     let input: HtmlInputElement = e.target_unchecked_into();
                     name.set(input.value());
                 })}
             />
             
-            <label for="address">{ "名前: " }</label>
+            <label for="address">{ "mail address: " }</label>
             <input
                 id="address"
                 type="text"
@@ -100,8 +108,13 @@ pub fn contact() -> Html {
                     contents.set(input.value());
                 })}
             ></textarea>
-
-            <button type="submit">{ "送信" }</button>
-        </form>
+                <button type="submit">{ "送信" }</button>
+            </form>        
+            <>
+                <div>
+                    <h2>{"Collected data will be stored responsibly"}</h2>
+                </div>
+            </>
+        </>
     }
 }
