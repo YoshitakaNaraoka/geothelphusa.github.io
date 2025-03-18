@@ -45,24 +45,23 @@ pub fn contact() -> Html {
                     Err(err) => log::error!("Failed to send webhook: {:?}", err),
                 }
 
-                
-                
-                // let form_url = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
                 let data = format!(
                     "entry.12345678={}&entry.87654321={}&entry.13579246={}",
                     *name,
                     *address,
                     *contents
                 );
-
-                match Request::post(form_url)
+                
+                let form_submit_request = Request::post(form_url)
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .body(data)
-                    .send()
-                    .await
-                {
-                    Ok(_) => log::info!("送信成功！ありがとうございます。"),
-                    Err(_) => log::error!("送信失敗しました。もう一度試してください。"),
+                    ;
+                
+                let form_submit = form_submit_request.send().await;
+
+                match form_submit {
+                    Ok(response) => log::info!("送信成功！ありがとうございます。Response: {:?}", response),
+                    Err(err) => log::error!("送信失敗しました。もう一度試してください。Error: {:?}", err),
                 };
             });
         })
