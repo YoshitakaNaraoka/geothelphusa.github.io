@@ -25,7 +25,7 @@ pub fn app() -> Html {
 
     let onclick_clone = onclick.clone();
 
-        // Brightness mode handling (init:dark)
+    // Brightness mode handling (init:dark)
     let dark_mode = use_state(|| true);
     let dark_mode_clone = dark_mode.clone();
 
@@ -51,8 +51,8 @@ pub fn app() -> Html {
                                     <div class={classes!(menu_style())} onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
                                         <ul class={classes!(menu_list_style())}>
                                             { for vec![
-                                                (Route::About, "ABOUT"),
                                                 (Route::Home, "HOME"),
+                                                (Route::About, "ABOUT"),
                                                 (Route::Service, "SERVICE"),
                                                 (Route::News, "NEWS"),
                                                 (Route::Blog, "BLOG"),
