@@ -16,9 +16,6 @@ pub fn home() -> Html {
                 </a>
             </div>
             <h1>{"Welcome to Geothelphusa site !"}</h1>
-            <div class={classes!(center_styles())}>
-                // <p class={css!("align-items:flex-end;")}>{ if *dark_mode { "Dark" } else { "Light" } }</p>
-            </div>
         </>
     )
 }

@@ -2,6 +2,7 @@ mod styles;
 mod route;
 mod components;
 mod home;
+mod about;
 
 use stylist::yew::styled_component;
 use yew::{prelude::*, Renderer};

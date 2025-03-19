@@ -1,5 +1,6 @@
 use yew_router::prelude::*;
 use crate::home::*;
+use crate::about::*;
 
 
 #[derive(Routable, PartialEq, Eq, Clone, Debug)]
@@ -20,12 +21,6 @@ pub enum Route {
 }
 
 use yew::prelude::*;
-
-
-#[function_component(About)]
-fn about() -> Html {
-    html! { <h1>{ "About Page" }</h1> }
-}
 
 #[function_component(NotFound)]
 fn not_found() -> Html {
