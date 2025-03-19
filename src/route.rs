@@ -1,4 +1,5 @@
 use yew_router::prelude::*;
+use crate::home::*;
 
 
 #[derive(Routable, PartialEq, Eq, Clone, Debug)]
@@ -20,10 +21,6 @@ pub enum Route {
 
 use yew::prelude::*;
 
-#[function_component(Home)]
-fn home() -> Html {
-    html! { <h1>{ "Home Page" }</h1> }
-}
 
 #[function_component(About)]
 fn about() -> Html {

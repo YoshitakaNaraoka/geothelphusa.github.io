@@ -1,6 +1,7 @@
 mod styles;
 mod route;
 mod components;
+mod home;
 
 use stylist::yew::styled_component;
 use yew::{prelude::*, Renderer};
@@ -9,14 +10,10 @@ use crate::styles::*;
 use crate::route::*;
 use crate::components::*;
 
-
-
 #[styled_component(App)]
-fn app() -> Html {
+pub fn app() -> Html {
 
     let stylesheet = responsive_styles();
-
-    let logo_path = LOGO_PATH;
 
     let is_menu_opened = use_state(|| false);
 
@@ -81,17 +78,6 @@ fn app() -> Html {
                         checked={*dark_mode}
                     />  
                 </label>
-    
-                // main containts
-                <div class={classes!(center_styles())}>
-                    <a href="https://github.com/Geothelphusa">
-                        <img class={classes!(title_logo())} src={logo_path}/>
-                    </a>
-                </div>
-                <h1>{"Welcome to Geothelphusa site !"}</h1>
-                <div class={classes!(center_styles())}>
-                    <p class={css!("align-items:flex-end;")}>{ if *dark_mode { "Dark" } else { "Light" } }</p>
-                </div>
             </div>
         </main>
     }
