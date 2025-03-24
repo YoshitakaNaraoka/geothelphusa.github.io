@@ -318,13 +318,12 @@ pub fn link_card_style() -> Style {
             gap: 10px;
             align-items: center;
             text-decoration: none;
-            color: inherit;
         }
         .link-card-image img {
-            width: 150%;
+            width: 200%;
             height: auto;
             object-fit: cover;
-            float: left;
+            text-align: left;
             border-radius: 8px;
             margin-right: 10px;
         }
@@ -338,12 +337,12 @@ pub fn link_card_style() -> Style {
         }
         .link-card-description {
             margin: 5px 0;
+            white-space: nowrap;
         }
         .link-card-domain {
             display: flex;
             align-items: center;
             margin-top: 5px;
-            text-align: left;
         }
         .link-card-domain img {
             width: 16px;

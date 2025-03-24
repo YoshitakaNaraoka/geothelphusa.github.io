@@ -9,11 +9,7 @@ pub fn blog() -> Html {
     <>
         <main>
             <div class={classes!(container_styles(), center_styles())}>
-              <h1>
-                <a href="https://gist.github.com/YoshitakaNaraoka/9c1b9a03f76e54d4038b4321dcf62114">
-                  {"Geothelphusa philosophy"}
-                </a>
-              </h1>
+              <h1>{"Blog"}</h1>
               <div id="html-part" class={classes!(link_card_style())}>
                 <a class="link-card" href="https://gist.github.com/YoshitakaNaraoka/9c1b9a03f76e54d4038b4321dcf62114">
                   <div class="link-card-content">
