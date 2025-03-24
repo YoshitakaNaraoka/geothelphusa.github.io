@@ -301,3 +301,52 @@ pub fn menu_button_style() -> Style {
   ))
   .unwrap()
 }
+
+pub fn link_card_style() -> Style {
+  Style::new(css!(
+      r#"
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #fff;
+        border: 1px solid gray;
+        border-radius: 8px;
+        margin: 0;
+        padding: 10px;
+        .link-card {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 10px;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+        .link-card-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .link-card-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .link-card-title {
+            font-weight: bold;
+            margin: 0;
+        }
+        .link-card-description {
+            margin: 5px 0;
+        }
+        .link-card-domain {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .link-card-domain img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+      "#
+  ))
+  .unwrap()
+}
