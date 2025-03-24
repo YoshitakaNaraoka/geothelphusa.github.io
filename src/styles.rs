@@ -87,7 +87,7 @@ pub fn container_styles() -> Style {
       r#"
           margin: 0;
           
-          padding-top: 10vh;
+          padding-top: 5vh;
           display: flex;
           flex-direction: column;
           justify-content: top;
@@ -305,7 +305,7 @@ pub fn menu_button_style() -> Style {
 pub fn link_card_style() -> Style {
   Style::new(css!(
       r#"
-        width: 100%;
+        width: 45%;
         box-sizing: border-box;
         background-color: #fff;
         border: 1px solid gray;
@@ -321,9 +321,12 @@ pub fn link_card_style() -> Style {
             color: inherit;
         }
         .link-card-image img {
-            width: 100%;
+            width: 150%;
             height: auto;
             object-fit: cover;
+            float: left;
+            border-radius: 8px;
+            margin-right: 10px;
         }
         .link-card-text {
             display: flex;
@@ -340,6 +343,7 @@ pub fn link_card_style() -> Style {
             display: flex;
             align-items: center;
             margin-top: 5px;
+            text-align: left;
         }
         .link-card-domain img {
             width: 16px;

@@ -8,7 +8,7 @@ pub fn blog() -> Html {
   html! (
     <>
         <main>
-            <div class={classes!(center_styles())}>
+            <div class={classes!(container_styles(), center_styles())}>
               <h1>
                 <a href="https://gist.github.com/YoshitakaNaraoka/9c1b9a03f76e54d4038b4321dcf62114">
                   {"Geothelphusa philosophy"}
