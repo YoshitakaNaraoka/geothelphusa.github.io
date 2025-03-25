@@ -21,7 +21,6 @@ pub fn blog() -> Html {
                       <p class="link-card-description">{"Geothelphusa philosophy in Japanese"}</p>
                       <div class="link-card-domain">
                         <img id="favicon-image-code" src="https://github.githubassets.com/favicons/favicon.svg" />
-                        <p>{"https://gist.github.com/YoshitakaNaraoka/9c1b9a03f76e54d4038b4321dcf62114"}</p>
                       </div>
                     </div>
                   </div>
